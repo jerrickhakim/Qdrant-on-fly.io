@@ -1,0 +1,30 @@
+app = "qdrant-db"
+
+[build]
+  image = "qdrant/qdrant:v1.12.4"
+
+[[services]]
+  internal_port = 6333
+  processes = ["app"]
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+[[services]]
+  internal_port = 6334
+  processes = ["app"]
+
+  [[services.ports]]
+    handlers = ["tls"]
+    port = 6334
+
+[mounts]
+  source="qdrant_data"
+  destination="/qdrant/storage"
+
+[env]
+  QDRANT__SERVICE__API_KEY = "MY_SUPER_SECRET_KEY"
