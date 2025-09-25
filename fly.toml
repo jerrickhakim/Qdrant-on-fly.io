@@ -28,3 +28,7 @@ app = "qdrant-db"
 
 [env]
   QDRANT__SERVICE__API_KEY = "MY_SUPER_SECRET_KEY"
+
+[auto_suspend]
+  enabled = true
+  timeout = "5m"
